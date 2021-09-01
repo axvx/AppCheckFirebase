@@ -43,27 +43,20 @@ public class MainActivity extends AppCompatActivity {
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) { //This part is for the Floating Button
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("message");
-
-                //Escribir un valor en RTDB
-                myRef.setValue("Hello, World!");
-
 
             }
         });
 
-        //Inicializar Firebase y AppCheck
-        FirebaseApp.initializeApp(/*context=*/ this);
-        /*FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
-        firebaseAppCheck.installAppCheckProviderFactory(
-                SafetyNetAppCheckProviderFactory.getInstance());*/
 
 
-
+      FirebaseApp.initializeApp(/*context=*/ this);
+      //Comment the following lines to observe the Unverified or Malicious Requests
+      FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
+      firebaseAppCheck.installAppCheckProviderFactory(
+               SafetyNetAppCheckProviderFactory.getInstance());
 
 
     }

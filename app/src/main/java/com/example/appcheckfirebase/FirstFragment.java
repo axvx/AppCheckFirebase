@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.appcheckfirebase.databinding.FragmentFirstBinding;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class FirstFragment extends Fragment {
 
@@ -32,8 +35,16 @@ public class FirstFragment extends Fragment {
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+
+                //Escribir en la base de datos
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("message");
+
+                //Write a value in the RTDB
+                myRef.setValue("Hello, World!");
+                Snackbar.make(view, "A value has been written to the Database", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
     }
